@@ -1,14 +1,22 @@
-with:
+name: Deploy ke AWS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy ke Server via SSH
+        uses: appleboy/ssh-action@master
+        with:
           host: 18.141.231.95
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # Tambahkan baris di bawah ini untuk melewati verifikasi host
-          proxy_timeout: 60s
-          command_timeout: 2m
-          fingerprint: "" 
-          # Atau tambahkan opsi ini agar tidak menolak koneksi:
-          envs: SSH_OPTIONS
-          script_stop: true
+          skip_strict_key_checking: true
           script: |
             mkdir -p ~/uas-project
             cd ~/uas-project
