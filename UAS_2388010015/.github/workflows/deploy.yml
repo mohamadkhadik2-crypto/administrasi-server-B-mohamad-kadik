@@ -13,7 +13,7 @@ jobs:
       - name: Deploy ke Server via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: 18.141.231.95
+          host: 18.143.129.241
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           # Kita hapus skip_strict_key_checking, sebagai gantinya kita tambahkan fingerprint kosong
