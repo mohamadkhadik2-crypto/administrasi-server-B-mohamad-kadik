@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy ke Server via SSH
         uses: appleboy/ssh-action@master
         with:
           host: 18.143.129.241
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # Kita hapus skip_strict_key_checking, sebagai gantinya kita tambahkan fingerprint kosong
-          fingerprint: ""
+          # Kita gunakan opsi ini untuk menghindari error host key
+          script_stop: true
           script: |
             mkdir -p ~/uas-project
             cd ~/uas-project
