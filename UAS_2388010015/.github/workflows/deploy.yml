@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Deploy ke Server via SSH
         uses: appleboy/ssh-action@master
@@ -16,7 +16,10 @@ jobs:
           host: 18.141.231.95
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Kita hapus skip_strict_key_checking, sebagai gantinya kita tambahkan fingerprint kosong
+          fingerprint: ""
           script: |
+            mkdir -p ~/uas-project
             cd ~/uas-project
-            git pull origin main
+            git pull origin main || git clone https://github.com/mohamadkhadik2-crypto/administrasi-server-B-mohamad-kadik.git .
             docker compose up -d --build
