@@ -1,0 +1,24 @@
+name: Deploy ke AWS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy ke Server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 18.143.129.241
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            mkdir -p ~/uas-project
+            cd ~/uas-project
+            git pull origin main || git clone https://github.com/mohamadkhadik2-crypto/administrasi-server-B-mohamad-kadik.git .
+            docker compose up -d --build
