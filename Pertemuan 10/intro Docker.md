@@ -63,7 +63,7 @@
     ![alt text](image-3.png)
 
 5. Create file di local
-   - baut folder baru compro_2388010015
+   - buat folder baru compro_2388010015
    - masukkan index.html compro
    - buat file docker dengan isi sebagai berikut
      FROM nginx: alpine
